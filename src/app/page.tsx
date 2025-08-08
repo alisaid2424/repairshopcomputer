@@ -1,8 +1,26 @@
+"use client";
+
 import Link from "next/link";
 import { LoginLink } from "@kinde-oss/kinde-auth-nextjs/components";
 import { Button } from "@/components/ui/button";
+import { useEffect, useState } from "react";
+import InitLoading from "@/components/InitLoading";
 
 export default function Home() {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 5000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (loading) {
+    return <InitLoading />;
+  }
+
   return (
     <div className="bg-black bg-home-img bg-cover bg-center">
       <main className="flex flex-col justify-center text-center max-w-5xl mx-auto h-dvh">
